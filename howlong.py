@@ -1,15 +1,18 @@
-# -*- coding: utf-8 -*-
 import requests
 import urllib2
 import contextlib
 import json
-import os
 import datetime
 import sys
 
+from secrets import secret, uid
+
+
+'''
+Finds how long a user has been active on the intra since the beginning of school
+'''
+
 def main(login):
-	uid = 'YOUR_ID'
-	secret = 'YOUR_SECRET'
 
 	r = requests.post("https://api.intra.42.fr/oauth/token", data={'grant_type': 'client_credentials', 'client_id': uid, 'client_secret': secret})
 	r.raise_for_status()

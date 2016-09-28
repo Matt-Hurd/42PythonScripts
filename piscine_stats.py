@@ -7,7 +7,14 @@ import os
 from collections import Counter
 from tabulate import tabulate
 
-piscine = "/August/"
+'''
+Expects user data to be saved from download_users.py
+Reads from the directory given in the 'piscine' variable.
+
+This has to be some of the ugliest code I've ever written...
+'''
+
+piscine = "/July/"
 
 class Student:
 	def __init__(self, name, uid, level, projects):

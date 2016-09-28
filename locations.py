@@ -7,8 +7,11 @@ import json
 import os
 from tabulate import tabulate
 
-uid = 'YOUR_ID'
-secret = 'YOUR_SECRET'
+from secrets import secret, uid
+
+'''
+Finds the locations of all active users
+'''
 
 r = requests.post("https://api.intra.42.fr/oauth/token", data={'grant_type': 'client_credentials', 'client_id': uid, 'client_secret': secret})
 r.raise_for_status()
@@ -20,7 +23,7 @@ url = 'https://api.intra.42.fr/v2/campus/7/locations?access_token=%s&per_page=10
 locations = []
 x = 1
 page = 1
-for x:
+while x:
 	with contextlib.closing(urllib2.urlopen(url + "&page=" + str(page))) as x:
 		result = json.load(x)
 		if not result:
@@ -33,4 +36,4 @@ clean = []
 for l in locations:
 	clean.append([l["host"], l["user"]["login"]])
 
-return l
+print tabulate(clean, headers=["host", "login"])

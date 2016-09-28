@@ -1,5 +1,5 @@
-import sys, os, json
-
+import sys
+import json
 
 def main(piscine, name):
 	with open(piscine + "/" + name) as data:
