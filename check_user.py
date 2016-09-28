@@ -7,7 +7,7 @@ def main(piscine, name):
 		projects = user["projects_users"]
 		print user["login"] + ":", user["displayname"]
 		for cursus in range(len(user["cursus_users"])):
-			if user["cursus_users"][cursus]["cursus"]["id"] == 4:
+			if user["cursus_users"][cursus]["cursus_id"] == 4:
 				print "Level", user["cursus_users"][cursus]["level"]
 		for p in projects:
 			if not p["project"]["name"].isdigit() and p["cursus_ids"][0] == 4:

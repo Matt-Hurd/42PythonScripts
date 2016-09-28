@@ -52,7 +52,7 @@ for filename in os.listdir(os.getcwd() + piscine):
 		added = False
 		if (not user["staff?"]):
 			for cursus in range(len(user["cursus_users"])):
-				if user["cursus_users"][cursus]["cursus"]["id"] == 4:
+				if user["cursus_users"][cursus]["cursus_id"] == 4:
 					u = Student(user["displayname"], user["login"], user["cursus_users"][cursus]["level"], user["projects_users"])
 					for pos in ordered:
 						if (u.level > pos.level and not added):
