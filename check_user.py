@@ -6,9 +6,11 @@ def main(piscine, name):
 		user = json.load(data)
 		projects = user["projects_users"]
 		print user["login"] + ":", user["displayname"]
-		print "Level", user["cursus_users"][0]["level"]
+		for cursus in range(len(user["cursus_users"])):
+			if user["cursus_users"][cursus]["cursus"]["id"] == 4:
+				print "Level", user["cursus_users"][cursus]["level"]
 		for p in projects:
-			if not p["project"]["name"].isdigit():
+			if not p["project"]["name"].isdigit() and p["cursus_ids"][0] == 4:
 				print p["project"]["name"], p["final_mark"] if p["final_mark"] else 0
 
 

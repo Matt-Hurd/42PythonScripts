@@ -14,7 +14,7 @@ Reads from the directory given in the 'piscine' variable.
 This has to be some of the ugliest code I've ever written...
 '''
 
-piscine = "/July/"
+piscine = "/August/"
 
 class Student:
 	def __init__(self, name, uid, level, projects):
@@ -51,14 +51,16 @@ for filename in os.listdir(os.getcwd() + piscine):
 		spot = 0
 		added = False
 		if (not user["staff?"]):
-			u = Student(user["displayname"], user["login"], user["cursus_users"][0]["level"], user["projects_users"])
-			for pos in ordered:
-				if (u.level > pos.level and not added):
-					ordered.insert(spot, u)
-					added = True
-				spot += 1
-			if (not added):
-				ordered.insert(spot, u)
+			for cursus in range(len(user["cursus_users"])):
+				if user["cursus_users"][cursus]["cursus"]["id"] == 4:
+					u = Student(user["displayname"], user["login"], user["cursus_users"][cursus]["level"], user["projects_users"])
+					for pos in ordered:
+						if (u.level > pos.level and not added):
+							ordered.insert(spot, u)
+							added = True
+						spot += 1
+					if (not added):
+						ordered.insert(spot, u)
 
 projects = []
 spot = 0
@@ -90,20 +92,23 @@ for x in ordered:
 		total_level += x.level
 		non_zero += 1
 	for project in x.projects:
-		found = False
-		for p in projects:
-			if (p.id == project["project"]["id"]):
-				found = True
-				p.attempts += 1
-				if project["final_mark"]:
-					if project["final_mark"] == -42:
-						p.cheats += 1
-					p.nonzero += 1
-					p.grade += project["final_mark"]
-					p.highest = project["final_mark"] if project["final_mark"] > p.highest else p.highest
-					p.grades.append(project["final_mark"])
-				else:
-					p.grades.append(0)
+		if project["cursus_ids"][0] == 4 and not project["project"]["name"].isdigit():
+			found = False
+			for p in projects:
+				if (p.id == project["project"]["id"]):
+					found = True
+					p.attempts += 1
+					if project["final_mark"]:
+						if project["final_mark"] == -42:
+							p.cheats += 1
+						p.nonzero += 1
+						p.grade += project["final_mark"]
+						p.highest = project["final_mark"] if project["final_mark"] > p.highest else p.highest
+						p.grades.append(project["final_mark"])
+					else:
+						p.grades.append(0)
+		else:
+			found = 1
 		if (not found):
 			projects.append(Project(project["project"]["name"], project["project"]["id"], project["final_mark"]))
 	spot += 1
