@@ -1,1 +1,7 @@
 secrets.py*
+All/
+October/
+August/
+July/
+.*
+*.pyc
