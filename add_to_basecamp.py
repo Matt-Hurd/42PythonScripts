@@ -6,8 +6,8 @@ import datetime
 import sys
 import time
 import os
-from rauth import OAuth2Service
 
+#bc_ac is the access token. I've been grabbing it by hand, but someone else could actually use oauth2 to grab it.
 from secrets import uid, secret, bc_ac, bc_team, bc_project
 
 def get_info(argv):
